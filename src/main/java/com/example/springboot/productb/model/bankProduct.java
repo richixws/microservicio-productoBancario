@@ -1,42 +1,51 @@
 package com.example.springboot.productb.model;
 
+import java.util.Date;
+
 import javax.validation.Valid;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-@ToString
-@Getter
-@Setter
-@Document(collection = "cuentabancario")
+@Data
+@Document(collection = "bankingProduct")
 public class bankProduct {
-
 	@Id
-	private String idproduct;
+	private String id;
 	
-	private String descripcion;
+	@NotEmpty(message = "El campo banco no puede estar en blanco")
+	private String bank;
 	
-	private Integer numMaxDeposit;
+	private String productName;
 	
-	private Double comision;
+	private String clientType;
 	
-	@Valid
-	private bankProductType typeProduct;
+	private String numAccount;
 	
-
-	public bankProduct(String descripcion, Integer numMaxDeposit, Double comision, @Valid bankProductType typeProduct) {
-		super();
-		this.descripcion = descripcion;
-		this.numMaxDeposit = numMaxDeposit;
-		this.comision = comision;
-		this.typeProduct = typeProduct;
-	}
+	@NotEmpty(message = "El campo nameOwner no puede estar en blanco")
+	private String nameOwner;
+	
+	private String numDoc;
+	
+	private Double amount;
+	
+	private Double amountAvailable;
+	
+	
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date jointAt;
+	@JsonFormat(pattern = "yyyy-MM-dd")
+	private Date updateAt;
 
 	
 	
